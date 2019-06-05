@@ -1,0 +1,32 @@
+{
+    "configList": [
+        {
+            "key": "SceneConfig",
+            "filePath": "resources/Config/SceneConfig.json"
+        },
+        {
+            "key": "PlayerModelConfig",
+            "filePath": "resources/Config/PlayerModelConfig.json"
+        },
+        {
+            "key": "CameraConfig",
+            "filePath": "resources/Config/CameraConfig.json"
+        },
+        {
+            "key": "WayModelConfig",
+            "filePath": "resources/Config/WayModelConfig.json"
+        },
+        {
+            "key": "MapItemConfig",
+            "filePath": "resources/Config/MapItemConfig.json"
+        },
+        {
+            "key": "RandMapItemGroup",
+            "filePath": "resources/Config/RandMapItemGroup.json"
+        },
+        {
+            "key": "NpcConfig",
+            "filePath": "resources/Config/NpcConfig.json"
+        }
+    ]
+}

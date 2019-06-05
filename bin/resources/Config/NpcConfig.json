@@ -1,0 +1,63 @@
+{
+    "说明": {
+        "name": "測試物體",
+        "file": "资源文件",
+        "type": "npc = 2,obstacle = 3,item = 4,大分类.细分尚未定义.",
+        "model": {
+            "height": "高度",
+            "width": "寬度"
+        },
+        "particle": {
+            "dead": "死亡特效資源名"
+        },
+        "sounds": {
+            "dead": "死亡音效"
+        },
+        "animations": {
+            "dead":"死亡動作"
+        },
+        "rebound": "-5 反弹",
+        "battle": {
+            "hp": 1,
+            "attackPower": 1,
+            "attackType": 1,
+            "defenes": 10
+        }
+    },
+    "100001": {
+        "name": "測試npc",
+        "file": "resources/u3dres/testwall.lh",
+        "type": 2,
+        "model": {
+            "height": 1,
+            "width": 1,
+            "length":1,
+            "modelOffset":[0,0,0]
+        },
+        "particle": {
+            "dead": "resources/u3dres/testeffect.lh"
+        },
+        "sounds": {
+            "dead": "resources/audio/test.mp3"
+        },
+        "animations": {
+            "dead": ""
+        },
+        "rebound": -2,
+        "move":{
+            "maxSpeed": 30,
+            "addSpeed": 20,
+            "movePartSpeed": 20,
+            "moveSpeedX":20,
+            "moveRotAngle":45,
+            "moveRotSpeed":20,
+            "rotVec":[0,0,0]
+        },
+        "battle": {
+            "hp": 1,
+            "attackPower": 1,
+            "attackType": 1,
+            "defenes": 10
+        }
+    }
+}

@@ -1,0 +1,33 @@
+網格渲染器查找關鍵字 mvp矩陣更新,world矩陣更新 此處添加逆矩陣更新
+//class laya.d3.core.MeshRenderer extends laya.d3.core.render.BaseRender
+
+this._shaderValues.setMatrix4x4(Sprite3D.WORLDMATRIX,transform.worldMatrix);
+this._shaderValues.setMatrix4x4(Sprite3D.ITWORLDMATRIX,transform._ITWorldMatrix);
+
+
+sprite3d查找關鍵字 相關矩陣定義位置 定義逆矩陣關鍵字定義
+//class laya.d3.core.Sprite3D extends laya.display.Node
+
+'ITWORLDMATRIX',function(){return this.ITWORLDMATRIX=Shader3D.propertyNameToID("u_ITWorldMat");},
+
+transform3d 關鍵字 矩陣賦值計算 矩陣更新時,同時計算逆矩陣
+//class laya.d3.core.Transform3D extends laya.events.EventDispatcher
+
+__getset(0,__proto,'worldMatrix',function(){}
+
+this._worldMatrix.invert(this._ITWorldMatrix);
+
+scene3d 計算time 和場景更新一類的shader參數 
+//class laya.d3.core.scene.Scene3D extends laya.display.Sprite
+
+
+this.bend= new Vector3();
+this.bias= new Vector3();
+
+this._shaderValues.setVector3(laya.d3.core.scene.Scene3D.Bend,this.bend);
+this._shaderValues.setVector3(laya.d3.core.scene.Scene3D.Bias,this.bias);
+this._shaderValues.setNumber(laya.d3.core.scene.Scene3D.TIME,this._time);
+
+'Bias',function(){return this.Bias=Shader3D.propertyNameToID("u_Bias");},'Bend',function(){return this.Bend=Shader3D.propertyNameToID("u_Bend");},
+
+

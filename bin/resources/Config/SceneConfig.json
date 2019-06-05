@@ -1,0 +1,15 @@
+{
+    "1001" :{
+        "name":"測試場景",
+        "music":"resources/audio/IWantMyTeamBack.mp3",
+        "file":"resources/u3dres/level1.ls",
+        "baseHight":5,
+        "moveRange":5,
+        "onRefresh":1,
+        "startRefresh":2,
+        "assets":[],
+        "mapitems":["1"], 
+        "startWay":["1"],
+        "randLoopWay":["1"]
+    }
+}

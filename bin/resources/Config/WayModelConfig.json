@@ -1,0 +1,9 @@
+{
+
+    "1" :{
+        "name":"測試路徑模塊",
+        "context":"说明",
+        "file":"resources/u3dres/testroad.lh",
+        "wayPointFile":"resources/u3dres/testroadPoints_waypoint.bytes"
+    }
+}

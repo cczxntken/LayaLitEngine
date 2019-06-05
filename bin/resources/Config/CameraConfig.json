@@ -1,0 +1,22 @@
+{
+    "Rot": {
+        "RotationDampingMax": 6,
+        "RotationDampingMin": 3,
+        "RotationDampAngleMax": 2
+    },
+    "FreeHeight":{
+        "FreeHeightFly":4.2,
+        "FreeHeightMin":7.5,
+        "FreeHeightMax":4.5,
+        "FreeHeightSpeed":1.5
+    },
+    "CamDistance":10,
+    "FieldView":{
+        "FieldViewDampBase":2.5,
+        "FieldViewBase":65,
+        "FieldViewMin":0,
+        "FieldViewMax":20,
+        "FieldViewToMaxPart":0.7
+    },
+    "LookAtPos":[0,3.5,0]
+}

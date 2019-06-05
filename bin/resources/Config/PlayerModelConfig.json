@@ -1,0 +1,74 @@
+{
+    "此处为编号": {
+        "name": "model名称",
+        "file": "导出的lh文件",
+        "type": "npc = 2,obstacle = 3,item = 4,大分类.细分尚未定义.",
+        "model": {
+            "height": "高度",
+            "width": "寬度",
+            "length":"長度"
+        },
+        "particle": {
+            "dead": "死亡特效資源名"
+        },
+        "sounds": {
+            "dead": "死亡音效"
+        },
+        "animations": {
+            "dead":"死亡動作"
+        },
+        "move":{
+            "maxSpeed": "主体最大速度",
+            "addSpeed": "加速度",
+            "moveSpeed": "model移动速度,上下左右",
+            "movePartSpeed": "方向上移动加速度"
+        },
+
+         "battle": {
+            "hp": "血量",
+            "attackPower": "攻擊力",
+            "attackType": "攻擊類型",
+            "defenes": "防禦"
+        }
+    },
+    "10001": {
+        "name": "默认model",
+        "file": "resources/u3dres/testplayer.lh",
+        "type": 1,
+        "model": {
+            "height": 1,
+            "width": 1,
+            "length":1,
+            "modelOffset":[0,0,-0.2]
+        },
+        "particle": {
+            "dead": ""
+        },
+        "sounds": {
+            "collision": "resources/audio/test.mp3",
+            "dead": "resources/audio/test.mp3"
+        },
+        "animations": {
+            "collision": "coltest",
+            "gothurt": "testdmg",
+            "dead": "testdead"
+        },
+        
+        "move":{
+            "maxSpeed": 30,
+            "addSpeed": 20,
+            "movePartSpeed": 20,
+            "moveSpeedX":20,
+            "moveRotAngle":45,
+            "moveRotSpeed":20,
+            "rotVec":[0,0,0]
+        },
+
+        "battle": {
+            "hp": 100,
+            "attackPower": 10000,
+            "attackType": 1,
+            "defenes": 10
+        }
+    }
+}
