@@ -1,11 +1,14 @@
-import BaseManager from "./BaseManager";
+
 import { LE } from "../LitEngine/LE";
+import { Managers } from "./BaseManager";
 
-
-export default class ConfigManager extends BaseManager {
-
+export default class ConfigManager extends Managers.BaseManager {
     public static Creat(): ConfigManager {
         return new ConfigManager();
+    }
+
+    public Init() {
+
     }
 
     private _loadCall: Laya.Handler;

@@ -1,37 +1,29 @@
 
 export default class InGameModule implements GameModuleBase {
-    private _callBackHandle:Laya.Handler;
+    Init(pComplete?: Laya.Handler) {
+
+    }
+    private _callBackHandle: Laya.Handler;
     constructor(pScName: string) {
 
     }
-    public GetScene(){
+    public GetScene() {
 
     }
     //#region init
-    public Init(fun: Laya.Handler) {//addShaderPass
-     
-    }
 
-    protected OnAssetsPreLoaded(event) {
-
-    }
-
-    protected OnUILoaded() {
-
-        this.Run();
-    }
     //#endregion
-   
+
     //#region running
     public Run() {
-     }
+    }
     public Pause() { }
     public Resume() { }
     public Destroy() {
     }
 
     //#endregion
-   
+
     //#region update
     public Update(dt: number) {
 
@@ -44,10 +36,9 @@ export default class InGameModule implements GameModuleBase {
 
     //#region call
     //#endregion
-   
 
-    public ModuleEvent(pEventData)
-    {
+
+    public ModuleEvent(pEventData)  {
 
     }
 }

@@ -13,14 +13,14 @@ interface IRuning{
     Resume();
 }
 
-interface InitCallBack{
-    Init(fun: Laya.Handler) ;
-}
-
 interface IRest{
     Rest();
 }
 
-interface ICustomArray<T>{
-    [index:number]:T;
+interface IInit{
+    Init();
+}
+
+interface IInitAsync{
+    Init(pComplete?:Laya.Handler);
 }

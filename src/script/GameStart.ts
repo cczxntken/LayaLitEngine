@@ -77,7 +77,7 @@ export default class GameStart extends Laya.Scene {
         console.log(this.testScene_btn);
         // var testcount = 0;
         // this.testScene_btn.on(laya.events.Event.CLICK, this, function () { this.btn_texttest.text = String(testcount); testcount++; });
-        GameCore.Core.mgrState.GotoState(new MainState());
+       // GameCore.Core.mgrState.GotoState(new MainState());
         // GameCore.mgrUI.ShowUI("UIMain",function(sui){
         //     console.log(sui);
         // });

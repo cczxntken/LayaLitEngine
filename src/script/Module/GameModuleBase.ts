@@ -1,4 +1,4 @@
-interface GameModuleBase extends IDispose, IUpdate, IRuning, InitCallBack {
+interface GameModuleBase extends IDispose, IUpdate, IRuning ,IInitAsync{
     GetScene();
     ModuleEvent(args);
 }

@@ -17,7 +17,7 @@ export module Log {
     }
     export class DLog {
         public static MinLogType: DLogType = DLogType.Log;
-        private static IsShow(pType: DLogType): boolean  {
+        protected static IsShow(pType: DLogType): boolean  {
             let ret = pType - DLog.MinLogType;
             if (ret < 0) return false;
             return true;

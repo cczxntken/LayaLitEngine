@@ -1,12 +1,16 @@
 
 import GameCore from "../GameCore";
-import BaseManager from "./BaseManager";
 import { State } from "../State/StateBase";
+import { Managers } from "./BaseManager";
 
 
-export default class StateManager extends BaseManager {
+export default class StateManager extends Managers.BaseManager {
     public static Creat(): StateManager {
         return new StateManager(null);
+    }
+
+    public Init() {
+
     }
 
     private _curState: State.StateBase;

@@ -1,10 +1,15 @@
-import BaseManager from "./BaseManager";
+
 import { Pool } from "../LitEngine/Pool/NodePool";
 import GameCore from "../GameCore";
+import { Managers } from "./BaseManager";
 
-export default class EffectManager extends BaseManager {
+export default class EffectManager extends Managers.BaseManager {
     public static Creat(): EffectManager {
         return new EffectManager();
+    }
+
+    public Init() {
+
     }
 
     private _pool: Pool.NodePool;

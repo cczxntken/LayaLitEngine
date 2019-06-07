@@ -2,10 +2,12 @@
 import MainState from "./State/MainState";
 import UIManager from "./Managers/UIManager";
 import StateManager from "./Managers/StateManager";
-import BaseManager from "./Managers/BaseManager";
 import ConfigManager from "./Managers/ConfigManager";
+import { LE } from "./LitEngine/LE";
+import { Managers } from "./Managers/BaseManager";
 
-export default class GameCore extends Laya.Script {
+export default class GameCore implements IDispose {
+
     //#region config
     /**
  * <p>缩放模式。默认值为 "noscale"。</p>
@@ -37,119 +39,127 @@ export default class GameCore extends Laya.Script {
     //#endregion
     //#region core核心组件
     private static _core: GameCore = null;
-    public static get Core()  {
-        if (GameCore._core == null)  {
-            let tnode = Laya.stage.addChild(new Laya.Node()) as Laya.Node;
-            let tsc = tnode.addComponent(GameCore);
+    public static get Core() {
+        if (GameCore._core == null) {
+            GameCore._core = new GameCore();
         }
         return GameCore._core;
     }
     //#region layers
-    public readonly layerLogic: Laya.Node;
     public readonly layerScene: Laya.Sprite;
     public readonly layerUI: Laya.Sprite;
     public readonly layerOver: Laya.Sprite;
-
     //#endregion
 
     //#region mgrs
-    public readonly mgrUI:UIManager;
-    public readonly mgrState:StateManager;
-    public readonly mgrConfig:ConfigManager;
+    public static get mgrUI(): UIManager {
+        return GameCore.Core.mgrList["UIManager"];
+    }
 
+    public static get mgrConfig(): ConfigManager {
+        return GameCore.Core.mgrList["ConfigManager"];
+    }
 
-    private _mgrList: BaseManager[] = [];
+    public static get mgrState(): StateManager {
+        return GameCore.Core.mgrList["StateManager"];
+    }
+
+    private mgrList: Managers.BaseManager[] = [];
+    private updateList: Managers.BaseManager[] = [];
     private _dataUpdateTimer = 0;
+    private isRuning = false;
     //#endregion
 
     //#endregion  
     //#region 方法
     // "showall"
     private constructor() {
-        super();
         GameCore._core = this;
-
-        this.layerLogic = Laya.stage.addChild(new Laya.Node()) as Laya.Node;
+        Laya.stage.frameLoop(1, this, this.Update);
         this.layerScene = Laya.stage.addChild(new Laya.Sprite()) as Laya.Sprite;//可見最底层
         this.layerUI = Laya.stage.addChild(new Laya.Sprite()) as Laya.Sprite;
         this.layerOver = Laya.stage.addChild(new Laya.Sprite()) as Laya.Sprite;
 
-        this.mgrUI = UIManager.Creat();
-        this.mgrState = StateManager.Creat();
-        this.mgrConfig = ConfigManager.Creat();
-
-        this._mgrList.push(this.mgrUI);
-        this._mgrList.push(this.mgrState);
-
-      
-
-        this.mgrConfig.LoadConfig(Laya.Handler.create(this,this.OnConfigLoaded));
+        this.AddMgr(ConfigManager.Creat(), false);
+        this.AddMgr(UIManager.Creat());
+        this.AddMgr(StateManager.Creat());
     }
 
     public static Init() {
         if (GameCore._core != null) return;
-        GameCore.Core;
+        let tcore = GameCore.Core;
+        GameCore.mgrConfig.LoadConfig(Laya.Handler.create(tcore, tcore.OnConfigLoaded));
     }
-    
 
     public static DestroyCore() {
         if (GameCore._core != null) {
-            GameCore._core.destroy();
+            GameCore._core.Destroy();
             GameCore._core = null;
         }
     }
 
-    protected OnConfigLoaded()
-    {
-		this.mgrState.GotoState(new MainState());
+    private AddMgr(pMgr: Managers.BaseManager, pUpdate: boolean = true)  {
+        let g = this;
+        g.mgrList[pMgr.managerName] = pMgr;
+        if (pUpdate) {
+            g.updateList.push(pMgr);
+        }
     }
 
-    public destroy() {
-        this.layerLogic.destroy();
-        this.layerScene.destroy();
-        this.layerUI.destroy();
-        this.layerOver.destroy();
-        super.destroy();
+    protected OnConfigLoaded()  {
+        let p = this;
+        for (let i = 0; i < p.mgrList.length; i++) {
+            const e = p.mgrList[i];
+            e.Init();
+        }
+        GameCore.mgrState.GotoState(new MainState());
+        p.isRuning = true;
     }
-    
-    onUpdate ()  {
-        let dt = Math.min(Laya.timer.delta * 0.001,0.5) ;
 
-        let self = this;
+    Destroy() {
+        let p = this;
+        Laya.stage.clearTimer(this, this.Update);
+        p.layerScene.destroy();
+        p.layerUI.destroy();
+        p.layerOver.destroy();
+    }
+
+    Update() {
+        let p = this;
+        if (!p.isRuning) return;
+        let dt = Math.min(Laya.timer.delta * 0.001, 0.5);
+
         let tinterval = GameCore.dataUpdateInterval;
         let topentry = GameCore.openTryCache;
-        let ttimer = self._dataUpdateTimer + dt;    
+        let ttimer = p._dataUpdateTimer + dt;
         let tisUpdateData = false;
-        if (ttimer >= tinterval)  {
+        if (ttimer >= tinterval) {
             tisUpdateData = true;
-            self._dataUpdateTimer = ttimer;
+            p._dataUpdateTimer = ttimer;
         }
 
-        var tlist = this._mgrList;
+        var tlist = this.mgrList;
 
         for (let index = 0; index < tlist.length; index++) {
             const element = tlist[index];
-            if(topentry)
-            {
-               try {
-                self.UpdateElement(element,dt,tisUpdateData);
-               } catch (error) {
-                   console.error(element.managerName + "---"+error);
-               }
+            if (topentry) {
+                try {
+                    p.UpdateElement(element, dt, tisUpdateData);
+                } catch (error) {
+                    console.error(element.managerName + "---" + error);
+                }
             }
-            else
-            {
-                self.UpdateElement(element,dt,tisUpdateData);
+            else {
+                p.UpdateElement(element, dt, tisUpdateData);
             }
-            
+
         }
     }
 
-    private UpdateElement(element:BaseManager,dt:number,isUpdateData:boolean)
-    {
-        element.Update(dt);
+    private UpdateElement(e: Managers.BaseManager, dt: number, isUpdateData: boolean) {
+        e.Update(dt);
         if (isUpdateData)
-            element.UpdateData();
+            e.UpdateData();
     }
     //#endregion
 }

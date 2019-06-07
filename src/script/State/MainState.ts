@@ -8,13 +8,13 @@ export default class MainState extends State.StateBase {
     public OnEnter(fun: Laya.Handler,pData?:any) {
         super.OnEnter(fun,pData);
 
-        GameCore.Core.mgrUI.ShowUI("UIMain", Laya.Handler.create(this, function () {
+        GameCore.mgrUI.ShowUI("UIMain", Laya.Handler.create(this, function () {
             this.OnLoaded();
         }));
     }
 
     public OnExit() {
-        GameCore.Core.mgrUI.DestoryUI("UIMain");
+        GameCore.mgrUI.DestoryUI("UIMain");
         super.OnExit();
     }
 

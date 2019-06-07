@@ -1,8 +1,8 @@
 export module Pool {
     export class NodePool {
 
-        private _creater:((url:string)=>any);
-        private _destroyer:((obj:any)=>void);
+        protected _creater:((url:string)=>any);
+        protected _destroyer:((obj:any)=>void);
         constructor() {
 
         }
@@ -17,7 +17,7 @@ export module Pool {
             this._destroyer = pDestroyer;
         }
 
-        private _groupList: NodeGroup[] = [];
+        protected _groupList: NodeGroup[] = [];
         public Get(pKey: string): any  {
             if(pKey == null || pKey.length == 0) return;
             let tgp = this._groupList[pKey];
@@ -53,7 +53,7 @@ export module Pool {
 
     export class NodeGroup {
         public readonly Key: string;
-        private _queue: any[] = [];
+        protected _queue: any[] = [];
         constructor(pKey: string) {
             this.Key = pKey;
         }

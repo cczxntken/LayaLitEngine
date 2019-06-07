@@ -16,7 +16,7 @@ export default class UIMain extends UIBase {
         var testcount = 0;
         
         this.testbutton.on(laya.events.Event.CLICK, this, function () { 
-            GameCore.Core.mgrState.GotoState(new InGameState(),"1001");
+            GameCore.mgrState.GotoState(new InGameState(),"1001");
         });
     }
     

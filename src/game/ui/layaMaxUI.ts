@@ -34,7 +34,7 @@ export module game.ui.UI {
         }
     }
     REG("game.ui.UI.UIInGameUI",UIInGameUI);
-    export class UIMainUI extends View {
+    export class UIMainUI extends Scene {
 		public testimge:Laya.Image;
         constructor(){ super()}
         createChildren():void {

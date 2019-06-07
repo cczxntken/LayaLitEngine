@@ -15,7 +15,7 @@ export default class UIMain extends UIBase {
     {
        this.backbtn = this.owner.getChildByName("backbtn") as Laya.Button;
         this.backbtn.on(laya.events.Event.CLICK, this, function () { 
-            GameCore.Core.mgrState.GotoState(new MainState());
+            GameCore.mgrState.GotoState(new MainState());
         });
     }
 }

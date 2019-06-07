@@ -17,7 +17,7 @@ export default abstract  class BaseScene implements IDispose,IUpdate,IRuning {
     }
     constructor(pName:string) {
         let s = this;
-        let c = GameCore.Core.mgrConfig.GetConfig("SceneConfig");
+        let c = GameCore.mgrConfig.GetConfig("SceneConfig");
         s._data = c[pName];
         s._name = s.data.name;  
     }
