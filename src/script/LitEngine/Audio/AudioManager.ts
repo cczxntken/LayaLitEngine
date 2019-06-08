@@ -108,15 +108,13 @@ export module Audio {
             let tmixmolume = a._onMixerVolume;
             if (a._mixerSoundPlay > 0) {
                 if (tcurvolume > tmixmolume) {
-                    tcurvolume -= dt;
-                    a._curVolume = tcurvolume < tmixmolume ? tmixmolume : tcurvolume;
+                    a._curVolume = Math.max(tcurvolume - dt,tmixmolume);
                     a.OnChangeMusicVolume();
                 }
             }
             else {
                 if (tcurvolume < 1) {
-                    tcurvolume += dt;
-                    a._curVolume = tcurvolume > 1 ? 1 : tcurvolume;
+                    a._curVolume = Math.min(tcurvolume + dt,1);
                     a.OnChangeMusicVolume();
                 }
             }
